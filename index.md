@@ -3,6 +3,6 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 heading: 'better than nothing'
-subheading: 'coding memo'
+subheading: ''
 banner: '/assets/images/top.jpg'
 ---
