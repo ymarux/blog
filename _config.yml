@@ -28,11 +28,17 @@ github_username: ymarux
 
 # Build settings
 #theme: minima
-#remote_theme: "jeffreytse/jekyll-theme-yat"
-theme: jekyll-theme-yat
+remote_theme: "jeffreytse/jekyll-theme-yat"
+#theme: jekyll-theme-yat
 plugins:
+  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-spaceship
+
+safe: false
 
 sass:
   style: compressed
@@ -40,6 +46,9 @@ sass:
 # Jekyll 4.x用の最適化設定
 minify: true
 incremental: true
+
+# paginate
+paginate: 5
 
 # Exclude from processing.
 # The following items will not be processed, by default.

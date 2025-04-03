@@ -37,7 +37,15 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 # 2023/2/4 add
 source "https://rubygems.org"
 gem "jekyll", "~> 4.4.1"
-gem "webrick"  # Ruby 3.x必須
 gem "jekyll-seo-tag"
-gem "jekyll-theme-yat"
+#gem "jekyll-theme-yat"
+gem "jekyll-remote-theme", group: :jekyll_plugins
+
+group :jekyll_plugins do
+  gem "jekyll-spaceship"
+  gem "webrick" # Ruby 3.x必須[1][4]
+  gem "logger"  # Ruby 3.5警告対策[1]
+  gem "jekyll-paginate"
+  gem "jekyll-sitemap"
+end
 
