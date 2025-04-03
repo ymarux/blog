@@ -33,8 +33,10 @@ jobs:
         run: |
           bundle exec jekyll build --trace --verbose --destination ./_site
 
-      - name: Upload Artifact
-        uses: actions/upload-pages@v3
+      - mame: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: './_site'
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
