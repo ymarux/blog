@@ -7,21 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>はじめに | memo</title>
+<title>Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える | memo</title>
 <meta name="generator" content="Jekyll v4.4.1">
-<meta property="og:title" content="はじめに">
+<meta property="og:title" content="Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える">
 <meta property="og:locale" content="en_US">
-<meta name="description" content="jekyllで始めました。 主に技術系の雑多なメモ置き場です。">
-<meta property="og:description" content="jekyllで始めました。 主に技術系の雑多なメモ置き場です。">
-<link rel="canonical" href="http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html">
-<meta property="og:url" content="http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html">
+<meta name="description" content="前提">
+<meta property="og:description" content="前提">
+<link rel="canonical" href="http://localhost:4000/blog/windows/2025/04/03/windows-keyswap.html">
+<meta property="og:url" content="http://localhost:4000/blog/windows/2025/04/03/windows-keyswap.html">
 <meta property="og:site_name" content="memo">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-02-04T23:26:00+09:00">
+<meta property="article:published_time" content="2025-04-03T11:04:00+09:00">
 <meta name="twitter:card" content="summary">
-<meta property="twitter:title" content="はじめに">
+<meta property="twitter:title" content="Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-02-04T23:26:00+09:00","datePublished":"2023-02-04T23:26:00+09:00","description":"jekyllで始めました。 主に技術系の雑多なメモ置き場です。","headline":"はじめに","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html"},"url":"http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-03T11:04:00+09:00","datePublished":"2025-04-03T11:04:00+09:00","description":"前提","headline":"Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/windows/2025/04/03/windows-keyswap.html"},"url":"http://localhost:4000/blog/windows/2025/04/03/windows-keyswap.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="icon" href="">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -922,11 +922,11 @@ function googleTranslateElementInit() {
 
 
 <header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">はじめに</h1>
+  <h1 class="post-title p-name" itemprop="name headline">Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える</h1>
   <h2 class="post-subtitle"></h2>
 
   <p class="post-meta">
-    <time class="dt-published" datetime="2023-02-04T23:26:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Feb 4, 2023
+    <time class="dt-published" datetime="2025-04-03T11:04:00+09:00" itemprop="datePublished"><i class="fa fa-calendar"></i> Apr 3, 2025
     </time>
 
     
@@ -969,21 +969,54 @@ function googleTranslateElementInit() {
 
     <div class="post-content e-content" itemprop="articleBody">
 
-      <p>jekyllで始めました。
-主に技術系の雑多なメモ置き場です。</p>
+      <h1 id="前提">前提</h1>
+
+<p>Windows のみ。
+Windows11 まで確認済み。</p>
+
+<h1 id="手順">手順</h1>
+
+<ul>
+  <li>regedit.exe を起動</li>
+  <li>以下に移動
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout
+</code></pre></div>    </div>
+  </li>
+  <li>新規 → バイナリ値 で 「Scancode Map」を作成。</li>
+  <li>以下を入力
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>00 00 00 00 00 00 00 00
+03 00 00 03 1D 00 3A 00
+00 00 3B 00 00 00 00 00
+</code></pre></div>    </div>
+    <p>| コード | 説明 |
+| — | — |
+| 00 00 00 00 | ヘッダー：バージョン。すべて 0 にする。 |
+| 00 00 00 00 | ヘッダー：フラグ。すべて 0 にする。 |
+| 03 00 00 03 | 0x03000000 にエントリ数を加算。null 終端含む。 |
+| 1D 00 3A 00 | 0x3A00（CapsLock）→  0x1D00（Ctrl）|
+| 00 00 3B 00 | 0x3B00（F1）→ 0x0000（null） |
+| 00 00 00 00 | null 終端 |</p>
+  </li>
+  <li>OSを再起動する</li>
+</ul>
+
+<h2 id="参考">参考</h2>
+<p>https://docs.microsoft.com/ja-jp/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers</p>
 
 
     </div>
 
 </article>
 <div class="post-nav">
-<span></span><a class="next" href="/blog/windows/2025/04/03/windows-keyswap.html" title="Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える">Windows で F1 キー無効化と CapsLock を左...</a>
+<a class="previous" href="/blog/jekyll/update/2023/02/04/first-jekyll.html" title="はじめに">はじめに</a><span></span>
 </div>
 <div class="post-related">
       <div>Related Articles</div>
       <ul>
-        <li><a class="post-link" href="/blog/windows/2025/04/03/windows-keyswap.html" title="Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える">Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える</a></li>
-<li><a class="post-link" href="/blog/jekyll/update/2023/02/04/first-jekyll.html" title="Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える">はじめに</a></li>
+        <li><a class="post-link" href="/blog/jekyll/update/2023/02/04/first-jekyll.html" title="">はじめに</a></li>
+<li><a class="post-link" href="/blog/windows/2025/04/03/windows-keyswap.html" title="">Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える</a></li>
 </ul>
     </div>
 <div class="post-comments"></div></section>

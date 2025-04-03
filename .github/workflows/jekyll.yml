@@ -1,0 +1,43 @@
+name: Jekyll Build & Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4.2
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: |
+          gem install jekyll -v 4.4.1
+          bundle config path vendor/bundle
+          bundle install
+
+      - name: Build with Jekyll
+        run: |
+          bundle exec jekyll build --trace --verbose --destination ./_site
+
+      - name: Upload Artifact
+        uses: actions/upload-pages@v2
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+

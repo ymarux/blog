@@ -1,2 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.3">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2023-02-11T12:21:59+09:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">memo</title><subtitle>better than nothing</subtitle><entry><title type="html">はじめに</title><link href="http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html" rel="alternate" type="text/html" title="はじめに" /><published>2023-02-04T23:26:00+09:00</published><updated>2023-02-04T23:26:00+09:00</updated><id>http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html">&lt;p&gt;jekyllで始めました。
-主に技術系の雑多なメモ置き場です。&lt;/p&gt;</content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html">jekyllで始めました。 主に技術系の雑多なメモ置き場です。</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/blog/" rel="alternate" type="text/html" /><updated>2025-04-03T16:53:59+09:00</updated><id>http://localhost:4000/blog/feed.xml</id><title type="html">memo</title><subtitle>better than nothing</subtitle><entry><title type="html">Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える</title><link href="http://localhost:4000/blog/windows/2025/04/03/windows-keyswap.html" rel="alternate" type="text/html" title="Windows で F1 キー無効化と CapsLock を左 Ctrl キーに入れ替える" /><published>2025-04-03T11:04:00+09:00</published><updated>2025-04-03T11:04:00+09:00</updated><id>http://localhost:4000/blog/windows/2025/04/03/windows-keyswap</id><content type="html" xml:base="http://localhost:4000/blog/windows/2025/04/03/windows-keyswap.html"><![CDATA[<h1 id="前提">前提</h1>
+
+<p>Windows のみ。
+Windows11 まで確認済み。</p>
+
+<h1 id="手順">手順</h1>
+
+<ul>
+  <li>regedit.exe を起動</li>
+  <li>以下に移動
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout
+</code></pre></div>    </div>
+  </li>
+  <li>新規 → バイナリ値 で 「Scancode Map」を作成。</li>
+  <li>以下を入力
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00 00 00 00 00 00 00 00
+03 00 00 03 1D 00 3A 00
+00 00 3B 00 00 00 00 00
+</code></pre></div>    </div>
+    <p>| コード | 説明 |
+| — | — |
+| 00 00 00 00 | ヘッダー：バージョン。すべて 0 にする。 |
+| 00 00 00 00 | ヘッダー：フラグ。すべて 0 にする。 |
+| 03 00 00 03 | 0x03000000 にエントリ数を加算。null 終端含む。 |
+| 1D 00 3A 00 | 0x3A00（CapsLock）→  0x1D00（Ctrl）|
+| 00 00 3B 00 | 0x3B00（F1）→ 0x0000（null） |
+| 00 00 00 00 | null 終端 |</p>
+  </li>
+  <li>OSを再起動する</li>
+</ul>
+
+<h2 id="参考">参考</h2>
+<p>https://docs.microsoft.com/ja-jp/windows-hardware/drivers/hid/keyboard-and-mouse-class-drivers</p>]]></content><author><name></name></author><category term="Windows" /><summary type="html"><![CDATA[前提]]></summary></entry><entry><title type="html">はじめに</title><link href="http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html" rel="alternate" type="text/html" title="はじめに" /><published>2023-02-04T23:26:00+09:00</published><updated>2023-02-04T23:26:00+09:00</updated><id>http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll</id><content type="html" xml:base="http://localhost:4000/blog/jekyll/update/2023/02/04/first-jekyll.html"><![CDATA[<p>jekyllで始めました。
+主に技術系の雑多なメモ置き場です。</p>]]></content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[jekyllで始めました。 主に技術系の雑多なメモ置き場です。]]></summary></entry></feed>
