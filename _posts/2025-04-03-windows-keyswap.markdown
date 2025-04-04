@@ -6,7 +6,7 @@ categories: Windows
 ---
 # 前提
 
-indows のみ。
+Windows のみ。
 Windows11 まで確認済み。
 
 # 手順
