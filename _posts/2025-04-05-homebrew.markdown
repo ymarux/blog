@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "Homebrew"
+date:   2025-04-05 11:04:00 +0900
+categories: "Package Manager"
+---
+# 概要
+
+Homebrew は、MacOS、Linux向けのオープンソースのパッケージマネージャ。 <br>
+ターミナルからソフトウェアのインストール、更新、アンインストールができる。<br>
+Ruby製。
+
+# インストール
+
+MacOS の場合。
+
+### Command Line Tools (CLT) のインストール:
+
+```bash
+xcode-select --install
+```
+
+### Homebrewのインストール
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+### パスの設定
+
+Appleシリコン搭載のMacの場合、Homebrew は /opt/homebrew にインストールされる。<br>
+1行目が設定、2行目は現在のシェルに設定する。
+
+```bash
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+### インストールの確認
+
+```bash
+brew --version
+```
+
+# コマンド
+
+### アップデートコマンド
+
+| コマンド | 説明 |
+| :--- | :--- |
+| brew update | Homebrew 自体を最新の状態に更新する |
+| brew upgrade | インストール済みの全てのパッケージを最新化する |
+| brew upgrade <パッケージ名> | 指定パッケージを最新化する |
+| brew outdated | アップデート可能なパッケージの一覧を表示する | 
+
+
+### クリーンアップコマンド
+
+| コマンド | 説明 |
+| :--- | :--- |
+| brew clean | 古いバージョンのパッケージ、古いファイルを削除する |
+| brew doctor | システムの潜在的な問題を診断する |
+| brew autoremove | 不要になった依存パッケージを削除する |
